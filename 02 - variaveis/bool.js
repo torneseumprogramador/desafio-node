@@ -16,3 +16,8 @@ let falso2 = 2 === 1 // compara valor e tipo
 
 console.log(verdadeiro)
 console.log(falso)
+
+let x = {
+    nome: "Danilo",
+    telefone: "11 11111-1111"
+}
