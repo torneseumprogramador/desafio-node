@@ -13,7 +13,7 @@ const meu_telefone_call_back_o_que_farei_com_a_pizza = (pizza) => {
     else {
         console.log(`Você escolheu a pizza sabor: ${pizza}`);
     }
-
+    
     rl.close(); // Fechando a porta depois de pegar a pizza
 }
 
