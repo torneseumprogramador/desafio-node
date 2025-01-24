@@ -13,6 +13,9 @@ const meu_telefone_call_back_o_que_farei_com_a_pizza = (pizza) => {
     else if (pizza === "mussarela") {
         console.log(`Hummm esta pizza tomando vinho é excelente`);
     }
+    else if (pizza === "toscana") {
+        console.log(`Ebaaaa pizza de toscana`);
+    }
     else {
         console.log(`Você escolheu a pizza sabor: ${pizza}`);
     }
