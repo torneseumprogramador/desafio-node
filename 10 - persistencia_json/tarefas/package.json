@@ -1,0 +1,11 @@
+{
+  "name": "tarefas",
+  "version": "1.0.0",
+  "description": "Pequeno sistema para gerenciar tareas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Torne-se um programador",
+  "license": "ISC"
+}
