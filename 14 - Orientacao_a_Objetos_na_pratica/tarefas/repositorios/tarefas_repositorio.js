@@ -9,7 +9,7 @@ const driver = new SqliteDriver();
 
 const TarefaRepositorio = {
     cadastrar: async (tarefa) => {
-        await new Database().executar(
+        await new Database(driver).executar(
             "insert into tarefas(titulo, descricao, status)values(?, ?, ?)",
             [tarefa.titulo, tarefa.descricao, tarefa.status]
         )
