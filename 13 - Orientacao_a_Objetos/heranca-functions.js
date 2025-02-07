@@ -41,6 +41,13 @@ Pessoa.mensagem = function () {
     console.log("=====[é um método estático da função Pessoa]====");
 };
 
+// Pessoa.prototype.mensagem2 = function () {
+//     console.log("=====[é um método estático da função Pessoa]====");
+// };
+
+// const p = new Pessoa()
+// p.mensagem2()
+
 // Criando a função construtora para PessoaFisica (herança via protótipo)
 function PessoaFisica(id = 0, cpf = "") {
     Pessoa.call(this, id); // Chamando o "super"

@@ -1,0 +1,17 @@
+{
+  "name": "projeto_em_ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "run": "node dist/index.js",
+    "start": "npx tsc && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
