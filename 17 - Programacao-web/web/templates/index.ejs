@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meu Site</title>
+</head>
+<body>
+    <h1>Bem-vindo - <%= valor %></h1>
+    <hr>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (cliente of clientes) { %>
+            <tr>
+                <td><%= cliente.id %></td>
+                <td><%= cliente.nome %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    
+</body>
+</html>
