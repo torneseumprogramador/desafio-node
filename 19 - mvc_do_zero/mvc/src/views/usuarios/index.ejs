@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Lista de usuarios</h1>
+    <div>
+        Usuarios: <%= usuarios.length %>
+    </div>
+    <ul>
+        <% for (usuario of usuarios) { %>
+        <li>
+            <div>Nome: <%= usuario.nome %></div>
+            <div>Endereço: <%= usuario.endereco %></div>
+            <div>Email: <%= usuario.email %></div>
+        </li>
+        <% } %> 
+    </ul>
+</body>
+</html>

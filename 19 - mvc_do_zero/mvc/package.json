@@ -1,0 +1,26 @@
+{
+  "name": "mvc",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/app.js",
+    "build": "npx tsc && ts-node scripts/copyAssets.ts",
+    "dev": "ts-node scripts/dev.ts",
+    "migrate": "npx prisma migrate deploy",
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^6.3.1",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "typescript": "^5.7.3"
+  }
+}
