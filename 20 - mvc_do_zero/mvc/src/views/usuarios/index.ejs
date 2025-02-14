@@ -1,0 +1,33 @@
+<main class="container mx-auto p-8">
+    <h1 class="text-3xl font-bold text-blue-600 mb-4">Lista de Usuários</h1>
+
+    <div class="mb-4 flex justify-between items-center">
+        <div class="text-lg text-gray-700">
+            Total de Usuários: <span class="font-bold"><%= usuarios.length %></span>
+        </div>
+        <a href="/usuarios/novo" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
+            Novo Usuário
+        </a>
+    </div>
+
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+        <table class="min-w-full border-collapse border border-gray-300">
+            <thead class="bg-blue-600 text-white">
+                <tr>
+                    <th class="border border-gray-300 px-4 py-2">Nome</th>
+                    <th class="border border-gray-300 px-4 py-2">Endereço</th>
+                    <th class="border border-gray-300 px-4 py-2">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const usuario of usuarios) { %>
+                <tr class="hover:bg-gray-100">
+                    <td class="border border-gray-300 px-4 py-2"><%= usuario.nome %></td>
+                    <td class="border border-gray-300 px-4 py-2"><%= usuario.endereco %></td>
+                    <td class="border border-gray-300 px-4 py-2"><%= usuario.email %></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</main>

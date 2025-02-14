@@ -1,9 +1,4 @@
 amanha
-construir um app sem boilerplate (ARQUITETURA) com template (db)
-- MVC
-- DDD
-- CQRS
-
-construir uma api (db)
+construir uma api (db) - ensinar o que é flash message
 html para consumir a api
 criando lib e subindo no https://www.npmjs.com/
