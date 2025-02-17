@@ -1,0 +1,91 @@
+<main class="p-8">
+    <h1 class="text-3xl font-bold text-blue-600 mb-6 text-center">Novo Usuário</h1>
+
+    <form id="usuarioForm" action="/usuarios/criar" method="POST" class="bg-white shadow-md rounded-lg p-6 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Nome -->
+            <div>
+                <label for="nome" class="block text-gray-700 font-bold mb-2">Nome</label>
+                <input type="text" id="nome" name="nome" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+
+            <!-- Endereço -->
+            <div>
+                <label for="endereco" class="block text-gray-700 font-bold mb-2">Endereço</label>
+                <input type="text" id="endereco" name="endereco" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
+                <input type="email" id="email" name="email" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+
+            <!-- Senha -->
+            <div>
+                <label for="senha" class="block text-gray-700 font-bold mb-2">Senha</label>
+                <input type="password" id="senha" name="senha" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+        </div>
+
+        <!-- Botão de Enviar -->
+        <div class="flex justify-end mt-6">
+            <div id="feedback"></div>
+            <button type="submit"
+                class="bg-blue-600 text-white px-8 py-3 rounded-md shadow-md hover:bg-blue-700 transition">
+                Cadastrar Usuário
+            </button>
+        </div>
+    </form>
+
+
+    <script>
+        /*
+        document.getElementById("usuarioForm").addEventListener("submit", async function (event) {
+            event.preventDefault(); // Impede o envio normal do formulário
+
+            // Captura os dados do formulário
+            const formData = {
+                nome: document.getElementById("nome").value,
+                endereco: document.getElementById("endereco").value,
+                email: document.getElementById("email").value,
+                senha: document.getElementById("senha").value
+            };
+
+            try {
+                // Envia os dados via fetch para /usuarios/criar-json
+                const response = await fetch("/usuarios/criar-json", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json(); // Converte a resposta para JSON
+
+                // Exibe mensagem de sucesso ou erro
+                const feedback = document.getElementById("feedback");
+                if (result.sucesso == "true") {
+                    feedback.className = "bg-green-100 border border-green-400 text-green-700 p-4 rounded-md";
+                    feedback.innerHTML = `<strong>Sucesso!</strong> Criado com sucesso`;
+                    feedback.style.display = "block";
+                    
+                    // Limpa os campos do formulário
+                    document.getElementById("usuarioForm").reset();
+                } else {
+                    feedback.className = "bg-red-100 border border-red-400 text-red-700 p-4 rounded-md";
+                    feedback.innerHTML = `<strong>Erro!</strong> ${result.error}`;
+                    feedback.style.display = "block";
+                }
+            } catch (error) {
+                console.error("Erro ao enviar requisição:", error);
+            }
+        });
+        */
+    </script>
+</main>
