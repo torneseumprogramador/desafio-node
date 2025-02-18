@@ -1,0 +1,98 @@
+<main class="container mx-auto p-8">
+    <h1 class="text-3xl font-bold text-blue-600 mb-4">Lista de Usuários</h1>
+
+    <div class="mb-4 flex justify-between items-center">
+        <div class="text-lg text-gray-700">
+            Total de Usuários: <span class="font-bold"><%= quantidate %></span>
+        </div>
+        <a href="/usuarios/novo" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
+            Novo Usuário
+        </a>
+    </div>
+
+    <form action="/usuarios" method="GET" class="mb-6 flex gap-4 items-end">
+        <!-- Campo de busca por nome -->
+        <div>
+            <label for="nome" class="block text-gray-700 font-bold mb-2">Nome</label>
+            <input type="text" id="nome" name="nome" value="<%= nome || '' %>"
+                class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+        </div>
+    
+        <!-- Campo de data inicial -->
+        <div>
+            <label for="data_inicio" class="block text-gray-700 font-bold mb-2">Data Início</label>
+            <input type="date" id="data_inicio" name="data_inicio" value="<%= dataInicio || '' %>"
+                class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+        </div>
+    
+        <!-- Campo de data final -->
+        <div>
+            <label for="data_fim" class="block text-gray-700 font-bold mb-2">Data Fim</label>
+            <input type="date" id="data_fim" name="data_fim" value="<%= dataFim || '' %>"
+                class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+        </div>
+    
+        <!-- Botão de busca -->
+        <div>
+            <button type="submit"
+                class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition">
+                Buscar
+            </button>
+        </div>
+    </form>
+    
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+        <table class="min-w-full border-collapse border border-gray-300">
+            <thead class="bg-blue-600 text-white">
+                <tr>
+                    <th class="border border-gray-300 px-4 py-2">Nome</th>
+                    <th class="border border-gray-300 px-4 py-2">Endereço</th>
+                    <th class="border border-gray-300 px-4 py-2">Email</th>
+                    <th colspan="2" class="border border-gray-300 px-4 py-2">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const usuario of usuarios) { %>
+                <tr class="hover:bg-gray-100">
+                    <td class="border border-gray-300 px-4 py-2"><%= usuario.nome %></td>
+                    <td class="border border-gray-300 px-4 py-2"><%= usuario.endereco %></td>
+                    <td class="border border-gray-300 px-4 py-2"><%= usuario.email %></td>
+                    
+                    <td style="width: 20px;" class="border border-gray-300 px-4 py-2">
+                        <a href="/usuarios/<%= usuario.id %>/editar"
+                            class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
+                            Alterar
+                        </a>
+                    </td>
+                    
+                    <td style="width: 20px;" class="border border-gray-300 px-4 py-2">
+                        <form action="/usuarios/<%= usuario.id %>/excluir" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este usuário?')">
+                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">
+                                Excluir
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex items-center justify-between my-4">
+        <!-- Botão "Anterior" -->
+        <a href="?pagina=<%= currentPage - 1 %>&nome=<%= nome %>&data_inicio=<%= dataInicio %>&data_fim=<%= dataFim %>"
+            class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition <%= currentPage === 1 ? 'opacity-50 pointer-events-none' : '' %>">
+            Anterior
+        </a>
+    
+        <!-- Informação de Página -->
+        <span class="text-gray-700">Página <%= currentPage %> de <%= totalPages %></span>
+    
+        <!-- Botão "Próximo" -->
+        <a href="?pagina=<%= currentPage + 1 %>&nome=<%= nome %>&data_inicio=<%= dataInicio %>&data_fim=<%= dataFim %>"
+            class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition <%= currentPage === totalPages ? 'opacity-50 pointer-events-none' : '' %>">
+            Próximo
+        </a>
+    </div>
+    
+</main>
