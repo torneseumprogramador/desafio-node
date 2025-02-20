@@ -1,0 +1,53 @@
+<main class="container mx-auto p-8 text-center">
+    <h1 class="text-4xl font-bold text-blue-600">Cadastro</h1>
+
+    <form action="/login/cadastrar" method="POST" class="mt-6 bg-white shadow-md rounded-lg p-6 max-w-md mx-auto text-left">
+        <div class="grid gap-6">
+            <!-- Nome -->
+            <div>
+                <label for="nome" class="block text-gray-700 font-bold mb-2">Nome</label>
+                <input type="text" id="nome" name="nome" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+        
+            <!-- Email -->
+            <div>
+                <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
+                <input type="email" id="email" name="email" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+        
+            <!-- Senha -->
+            <div>
+                <label for="senha" class="block text-gray-700 font-bold mb-2">Senha</label>
+                <input type="password" id="senha" name="senha" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+                <label for="csenha" class="block text-gray-700 font-bold mb-2">Confirmação da Senha</label>
+                <input type="password" id="csenha" name="csenha" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+        </div>
+        
+        <% if (error_msg.length > 0) { %>
+            <br>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline"><%= error_msg %></span>
+            </div>
+        <% } %>
+
+        <br>
+        <!-- Botão de Login -->
+        <button type="submit"
+            class="w-full bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition">
+            Cadastrar
+        </button>
+
+        <!-- Links adicionais -->
+        <div class="mt-4 flex justify-between text-sm">
+            <a href="/login/esqueci-senha" class="text-blue-500 hover:underline">Esqueci a senha</a>
+            <a href="/login" class="text-blue-500 hover:underline">Login</a>
+        </div>
+    </form>
+</main>
