@@ -1,6 +1,8 @@
 ::::: proximas aulas :::::
 html para consumir a api
 
+refresh token logica e token expirado, esqueceu senha
+
 transformar api em unit of work
 
 criando lib e subindo no https://www.npmjs.com/
