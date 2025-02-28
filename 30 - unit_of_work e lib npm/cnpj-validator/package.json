@@ -1,0 +1,12 @@
+{
+  "name": "cnpj-validator-didox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": ["cnpj", "validacao", "validar", "brasil"],
+  "author": "Danilo Aparecido",
+  "license": "MIT",
+  "description": "Lib feita no treinamento de Node.js do https://www.torneseumprogramador.com.br"
+}
