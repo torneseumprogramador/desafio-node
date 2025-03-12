@@ -21,12 +21,4 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', 'HomeController.index')
-
-// Rotas de Clientes
-Route.group(() => {
-  Route.get('/', 'ClientesController.index')
-  Route.get('/:id', 'ClientesController.show')
-  Route.post('/', 'ClientesController.store')
-  Route.put('/:id', 'ClientesController.update')
-  Route.delete('/:id', 'ClientesController.destroy')
-}).prefix('/clientes')
+Route.get('/clientes', 'ClientesController.index')
