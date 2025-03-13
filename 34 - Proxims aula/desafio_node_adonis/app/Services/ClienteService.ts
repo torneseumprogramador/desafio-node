@@ -42,6 +42,10 @@ export class ClienteService {
     return this.repository.findAll()
   }
 
+  public async count(): Promise<number> {
+    return this.repository.count()
+  }
+  
   public async findById(id: number): Promise<ICliente | null> {
     return this.repository.findById(id)
   }

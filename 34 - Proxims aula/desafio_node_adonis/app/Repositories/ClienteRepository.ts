@@ -10,6 +10,11 @@ export class ClienteRepository {
     return clientes.map(cliente => new Cliente(cliente))
   }
 
+  public async count(): Promise<number> {
+    const count = await Database.from(this.table).count('* as total')
+    return count[0].total
+  }
+  
   public async findById(id: number): Promise<Cliente | null> {
     const cliente = await Database.from(this.table).where('id', id).first()
     return cliente ? new Cliente(cliente) : null
