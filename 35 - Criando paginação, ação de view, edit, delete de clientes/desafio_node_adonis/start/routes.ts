@@ -22,5 +22,9 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', 'HomeController.index')
 Route.get('/clientes', 'ClientesController.index').as('clientes.index')
+Route.get('/clientes/novo', 'ClientesController.create')
+Route.post('/clientes', 'ClientesController.store')
 Route.get('/clientes/:id', 'ClientesController.show')
+Route.get('/clientes/:id/edit', 'ClientesController.edit')
+Route.post('/clientes/:id', 'ClientesController.update')
 Route.get('/clientes/:id/delete', 'ClientesController.destroy')

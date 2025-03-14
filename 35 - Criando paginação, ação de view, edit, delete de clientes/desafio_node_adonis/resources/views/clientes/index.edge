@@ -12,8 +12,8 @@
         <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
         Lista de Clientes
       </p>
-      <a href="#" class="card-header-icon">
-        <span class="icon"><i class="mdi mdi-reload"></i></span>
+      <a href="/clientes/novo" class="button is-primary">
+        <span class="icon"><i class="mdi mdi-account-plus"></i></span>
       </a>
     </header>
     <div class="card-content">
@@ -56,6 +56,9 @@
                 <div class="buttons right nowrap">
                   <a href="/clientes/{{ cliente.id }}" class="button small green">
                     <span class="icon"><i class="mdi mdi-eye"></i></span>
+                  </a>
+                  <a href="/clientes/{{ cliente.id }}/edit" class="button small blue">
+                    <span class="icon"><i class="mdi mdi-pencil"></i></span>
                   </a>
                   <button 
                     class="button small red" 

@@ -44,9 +44,59 @@ export default class ClientesController {
     })
   }
 
+  public async edit({ params, view }: HttpContextContract) {
+    const cliente = await new ClienteService().findById(params.id)
+    if (!cliente) {
+      return view.render('errors/not-found')
+    }
+    return view.render('clientes/edit', { cliente })
+  }
+
+  public async update({ params, request, response }: HttpContextContract) {
+    const data = request.only([
+      'nome',
+      'whatsapp',
+      'cep',
+      'logradouro',
+      'numero',
+      'complemento',
+      'bairro',
+      'cidade',
+      'estado'
+    ])
+
+    await new ClienteService().update(params.id, data)
+    return response.redirect().toRoute('clientes.index')
+  }
+
   public async destroy({ params, response }: HttpContextContract) {
     try {
       await new ClienteService().delete(params.id)
+      return response.redirect().toRoute('clientes.index')
+    } catch (error) {
+      return response.redirect().back()
+    }
+  }
+
+  public async create({ view }: HttpContextContract) {
+    return view.render('clientes/create')
+  }
+
+  public async store({ request, response }: HttpContextContract) {
+    try {
+      const data = request.only([
+        'nome',
+        'whatsapp',
+        'cep',
+        'logradouro',
+        'numero',
+        'complemento',
+        'bairro',
+        'cidade',
+        'estado'
+      ])
+
+      await new ClienteService().create(data)
       return response.redirect().toRoute('clientes.index')
     } catch (error) {
       return response.redirect().back()

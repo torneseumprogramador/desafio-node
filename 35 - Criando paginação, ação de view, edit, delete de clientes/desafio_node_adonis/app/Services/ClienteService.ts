@@ -51,7 +51,7 @@ export class ClienteService {
     return this.repository.findById(id)
   }
 
-  public async create(data: Omit<ICliente, 'id' | 'created_at' | 'updated_at'>): Promise<ICliente> {
+  public async create(data: any): Promise<ICliente> {
     this.validateRequiredFields(data)
     return this.repository.create(data)
   }

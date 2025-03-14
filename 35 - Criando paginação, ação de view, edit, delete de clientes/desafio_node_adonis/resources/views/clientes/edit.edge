@@ -1,0 +1,97 @@
+@layout('layouts/main')
+
+@section('content')
+<section class="section main-section">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-account-edit"></i></span>
+        Editar Cliente
+      </p>
+    </header>
+    <div class="card-content">
+      <form method="POST" action="/clientes/{{ cliente.id }}">
+        <div class="field">
+          <label class="label">Nome</label>
+          <div class="control">
+            <input type="text" name="nome" class="input" value="{{ cliente.nome }}" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">WhatsApp</label>
+          <div class="control">
+            <input type="text" name="whatsapp" class="input" value="{{ cliente.whatsapp }}" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">CEP</label>
+          <div class="control">
+            <input type="text" name="cep" class="input" value="{{ cliente.cep }}" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Logradouro</label>
+          <div class="control">
+            <input type="text" name="logradouro" class="input" value="{{ cliente.logradouro }}" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Número</label>
+          <div class="control">
+            <input type="text" name="numero" class="input" value="{{ cliente.numero }}" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Complemento</label>
+          <div class="control">
+            <input type="text" name="complemento" class="input" value="{{ cliente.complemento }}">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Bairro</label>
+          <div class="control">
+            <input type="text" name="bairro" class="input" value="{{ cliente.bairro }}" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Cidade</label>
+          <div class="control">
+            <input type="text" name="cidade" class="input" value="{{ cliente.cidade }}" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Estado</label>
+          <div class="control">
+            <input type="text" name="estado" class="input" value="{{ cliente.estado }}" required>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <button type="submit" class="button is-primary">
+              <span class="icon"><i class="mdi mdi-content-save"></i></span>
+              <span>Salvar</span>
+            </button>
+          </div>
+          <div class="control">
+            <a href="/clientes" class="button is-light">
+              <span class="icon"><i class="mdi mdi-close"></i></span>
+              <span>Cancelar</span>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+@end 
