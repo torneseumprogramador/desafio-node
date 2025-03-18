@@ -1,0 +1,30 @@
+@set('submitText', submitText || 'Cadastrar')
+@set('submitIcon', submitIcon || 'mdi-account-plus')
+
+<div style="display: flex; gap: 10px; justify-content: flex-start;">
+  <button type="submit" class="button is-light is-medium has-border-dark">
+    <span class="icon">
+      <i class="mdi {{ submitIcon }}"></i>
+    </span>
+    <span>{{ submitText }}</span>
+  </button>
+
+  <a href="/clientes" class="button is-light is-medium is-outlined">
+    <span class="icon">
+      <i class="mdi mdi-arrow-left"></i>
+    </span>
+    <span>Voltar</span>
+  </a>
+</div>
+
+<style>
+.has-border-dark {
+  border: 2px solid #7a7a7a !important;
+  background-color: #eeeeee !important;
+}
+
+.is-light.is-outlined {
+  border: 2px solid #7a7a7a !important;
+  background-color: #eeeeee !important;
+}
+</style> 
