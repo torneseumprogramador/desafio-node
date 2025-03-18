@@ -1,0 +1,55 @@
+@layout('layouts/main')
+
+@section('content')
+<section class="section main-section">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-account-plus"></i></span>
+        Novo Administrador
+      </p>
+    </header>
+    <div class="card-content">
+      <form method="POST" action="/administradores">
+        <div class="field">
+          <label class="label">Nome</label>
+          <div class="control">
+            <input type="text" class="input" name="nome" value="{{ flashMessages.get('nome', '') }}" required>
+          </div>
+          @if(flashMessages.has('errors.nome'))
+            <p class="help is-danger">{{ flashMessages.get('errors.nome') }}</p>
+          @endif
+        </div>
+
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input type="email" class="input" name="email" value="{{ flashMessages.get('email', '') }}" required>
+          </div>
+          @if(flashMessages.has('errors.email'))
+            <p class="help is-danger">{{ flashMessages.get('errors.email') }}</p>
+          @endif
+        </div>
+
+        <div class="field">
+          <label class="label">Senha</label>
+          <div class="control">
+            <input type="password" class="input" name="senha" required>
+          </div>
+          @if(flashMessages.has('errors.senha'))
+            <p class="help is-danger">{{ flashMessages.get('errors.senha') }}</p>
+          @endif
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <button type="submit" class="button is-primary">
+              Salvar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+@end 
