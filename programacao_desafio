@@ -1,14 +1,16 @@
 ::::: proximas aulas :::::
+- crud de produtos
+- teste com envio de email
+- upload de arquivos
+- Schedule job
 
-App Adonis.js com template
-    - Schedule job
 App Adonis.js com API
+swagger
 
 v0 da versel para gerar front-end
 
 Iniciar com Nuxt.js
 
-swagger
 Falar sobre testes
 
 deploy AWS, Azure, Heroku
