@@ -1,24 +1,27 @@
-let clienteIdParaExcluir = null;
+let itemIdParaExcluir = null;
+let itemTipo = null;
 
-function openDeleteModal(id, nome) {
-  clienteIdParaExcluir = id;
-  document.getElementById('clienteNome').textContent = nome;
+function openDeleteModal(id, nome, tipo) {
+  itemIdParaExcluir = id;
+  itemTipo = tipo;
+  document.getElementById('itemNome').textContent = nome;
   document.getElementById('deleteModal').classList.add('is-active');
   document.getElementById('deleteModal').style.display = 'flex';
 }
 
 function closeDeleteModal() {
-  clienteIdParaExcluir = null;
+  itemIdParaExcluir = null;
+  itemTipo = null;
   document.getElementById('deleteModal').classList.remove('is-active');
   document.getElementById('deleteModal').style.display = 'none';
 }
 
 function confirmarExclusao() {
-  if (clienteIdParaExcluir) {
+  if (itemIdParaExcluir && itemTipo) {
     const loadingButton = document.querySelector('.modal-card-foot .button.is-danger');
     loadingButton.classList.add('is-loading');
     
-    window.location.href = `/clientes/${clienteIdParaExcluir}/delete`;
+    window.location.href = `/${itemTipo}/${itemIdParaExcluir}/delete`;
   }
   closeDeleteModal();
 }

@@ -108,4 +108,16 @@ export default class ProdutosController {
       return response.redirect().back()
     }
   }
+
+  public async destroyMultiple({ request, response, session }: HttpContextContract) {
+    try {
+      const ids = JSON.parse(request.input('ids'))
+      await new ProdutoService().deleteMultiple(ids)
+      session.flash('success', 'Produtos excluídos com sucesso!')
+      return response.redirect().back()
+    } catch (error) {
+      session.flash('error', error.message)
+      return response.redirect().back()
+    }
+  }
 } 

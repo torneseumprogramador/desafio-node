@@ -67,4 +67,9 @@ export class ProdutoRepository {
     const count = await query
     return count[0].total
   }
+
+  public async deleteMultiple(ids: number[]): Promise<boolean> {
+    const result = await Database.from(this.table).whereIn('id', ids).delete()
+    return result.length > 0
+  }
 } 

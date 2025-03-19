@@ -72,7 +72,7 @@
                   </a>
                   <button 
                     class="button small red" 
-                    onclick="openDeleteModal('{{ produto.id }}', '{{ produto.nome }}')"
+                    onclick="openDeleteModal('{{ produto.id }}', '{{ produto.nome }}', 'produtos')"
                     type="button"
                   >
                     <span class="icon"><i class="mdi mdi-trash-can"></i></span>
@@ -137,7 +137,7 @@
           <i class="mdi mdi-alert-circle mdi-48px"></i>
         </span>
         <p class="subtitle mt-4">
-          Tem certeza que deseja excluir o produto <strong id="produtoNome"></strong>?
+          Tem certeza que deseja excluir o produto <strong id="itemNome"></strong>?
         </p>
         <p class="has-text-grey is-size-7">Esta ação não pode ser desfeita.</p>
       </div>
@@ -165,7 +165,7 @@
     <section class="modal-card-body">
       <div class="content has-text-centered">
         <p class="subtitle mt-4">
-          Tem certeza que deseja excluir os <strong id="quantidadeProdutos"></strong> produtos selecionados?
+          Tem certeza que deseja excluir os <strong data-quantidade>0</strong> produtos selecionados?
         </p>
         <p class="has-text-grey is-size-7">Esta ação não pode ser desfeita.</p>
       </div>
@@ -190,4 +190,7 @@
 @section('scripts')
   <script src="/js/delete-modal.js"></script>
   <script src="/js/multiple-delete.js"></script>
+  <script>
+    initMultipleDelete('produto');
+  </script>
 @end 

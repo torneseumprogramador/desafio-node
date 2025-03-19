@@ -74,4 +74,8 @@ export class ProdutoService {
       }
     }
   }
+
+  public async deleteMultiple(ids: number[]): Promise<boolean> {
+    return this.repository.deleteMultiple(ids)
+  }
 } 

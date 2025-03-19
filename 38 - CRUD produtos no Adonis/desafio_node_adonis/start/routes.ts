@@ -53,6 +53,7 @@ Route.group(() => {
   Route.post('/produtos', 'ProdutosController.store')
   Route.get('/produtos/:id', 'ProdutosController.show')
   Route.get('/produtos/:id/edit', 'ProdutosController.edit')
+  Route.post('/produtos/multiple-delete', 'ProdutosController.destroyMultiple')
   Route.post('/produtos/:id', 'ProdutosController.update')
   Route.get('/produtos/:id/delete', 'ProdutosController.destroy')
 

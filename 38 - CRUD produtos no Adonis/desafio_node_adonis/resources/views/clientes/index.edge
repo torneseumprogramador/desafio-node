@@ -82,7 +82,7 @@
                   </a>
                   <button 
                     class="button small red" 
-                    onclick="openDeleteModal('{{ cliente.id }}', '{{ cliente.nome }}')"
+                    onclick="openDeleteModal('{{ cliente.id }}', '{{ cliente.nome }}', 'clientes')"
                     type="button"
                   >
                     <span class="icon"><i class="mdi mdi-trash-can"></i></span>
@@ -147,7 +147,7 @@
           <i class="mdi mdi-alert-circle mdi-48px"></i>
         </span>
         <p class="subtitle mt-4">
-          Tem certeza que deseja excluir o cliente <strong id="clienteNome"></strong>?
+          Tem certeza que deseja excluir o cliente <strong id="itemNome"></strong>?
         </p>
         <p class="has-text-grey is-size-7">Esta ação não pode ser desfeita.</p>
       </div>
@@ -175,14 +175,14 @@
     <section class="modal-card-body">
       <div class="content has-text-centered">
         <p class="subtitle mt-4">
-          Tem certeza que deseja excluir os <strong id="quantidadeClientes"></strong> clientes selecionados?
+          Tem certeza que deseja excluir os <strong data-quantidade>0</strong> clientes selecionados?
         </p>
         <p class="has-text-grey is-size-7">Esta ação não pode ser desfeita.</p>
       </div>
     </section>
     <footer class="modal-card-foot" style="justify-content: flex-end;">
       <button class="button" onclick="closeDeleteMultipleModal()">Cancelar</button>
-      <form id="deleteMultipleForm" action="/clientes/multiple-delete" method="POST" style="display: none;">
+      <form id="deleteMultipleForm" method="POST" style="display: none;">
         <input type="hidden" name="ids" id="selectedIds">
       </form>
       <button class="button is-danger" onclick="confirmarExclusaoMultipla()">
@@ -200,4 +200,7 @@
 @section('scripts')
   <script src="/js/delete-modal.js"></script>
   <script src="/js/multiple-delete.js"></script>
+  <script>
+    initMultipleDelete('cliente');
+  </script>
 @end 
