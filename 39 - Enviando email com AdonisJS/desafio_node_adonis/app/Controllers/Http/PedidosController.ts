@@ -3,6 +3,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { IViewPaginationMeta } from 'App/Interfaces/IViewPaginationMeta'
 import { ClienteService } from 'App/Services/ClienteService'
 import { PedidoService } from 'App/Services/PedidoService'
+import { ProdutoService } from 'App/Services/ProdutoService'
 
 function range(start: number, end: number): number[] {
   return Array.from({ length: end - start + 1 }, (_, i) => start + i)
@@ -93,9 +94,11 @@ export default class PedidosController {
 
   public async create({ view }: HttpContextContract) {
     const clientes = await new ClienteService().findAll()
+    const produtos = await new ProdutoService().findAll()
     return view.render('pedidos/create', {
       title: 'Novo Pedido',
-      clientes
+      clientes,
+      produtos
     })
   }
 

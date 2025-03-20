@@ -1,45 +1,47 @@
+function adicionarProduto() {
+  const container = document.getElementById('produtos-container');
+  const template = container.querySelector('.produto-item').cloneNode(true);
+  
+  // Limpar valores
+  template.querySelector('.produto-select').value = '';
+  template.querySelector('.quantidade-input').value = '';
+  template.querySelector('.valor-total').value = '';
+  
+  // Atualizar índices
+  template.querySelector('.produto-select').name = `produtos[${produtoCount}][produto_id]`;
+  template.querySelector('.quantidade-input').name = `produtos[${produtoCount}][quantidade]`;
+  
+  // Mostrar botão de remover
+  template.querySelector('.remove-produto').style.display = 'block';
+  
+  container.appendChild(template);
+  produtoCount++;
+}
+
+function calcularValorTotal() {
+  const valores = Array.from(document.querySelectorAll('.valor-total'))
+    .map(input => parseFloat(input.value) || 0);
+  
+  const total = valores.reduce((acc, curr) => acc + curr, 0);
+  document.getElementById('valor_total_pedido').value = `R$ ${total.toFixed(2)}`;
+}
+
+function calcularValorProduto(produtoItem) {
+  const select = produtoItem.querySelector('.produto-select');
+  const quantidade = produtoItem.querySelector('.quantidade-input');
+  const valorTotal = produtoItem.querySelector('.valor-total');
+  
+  const valor = parseFloat(select.selectedOptions[0]?.dataset.valor || 0);
+  const qtd = parseInt(quantidade.value) || 0;
+  
+  valorTotal.value = `R$ ${(valor * qtd).toFixed(2)}`;
+  calcularValorTotal();
+}
+
+let produtoCount = 0;
+
 document.addEventListener('DOMContentLoaded', function() {
-  let produtoCount = document.querySelector('.produto-item') ? 1 : 0;
-
-  function adicionarProduto() {
-    const container = document.getElementById('produtos-container');
-    const template = container.querySelector('.produto-item').cloneNode(true);
-    
-    // Limpar valores
-    template.querySelector('.produto-select').value = '';
-    template.querySelector('.quantidade-input').value = '';
-    template.querySelector('.valor-total').value = '';
-    
-    // Atualizar índices
-    template.querySelector('.produto-select').name = `produtos[${produtoCount}][produto_id]`;
-    template.querySelector('.quantidade-input').name = `produtos[${produtoCount}][quantidade]`;
-    
-    // Mostrar botão de remover
-    template.querySelector('.remove-produto').style.display = 'block';
-    
-    container.appendChild(template);
-    produtoCount++;
-  }
-
-  function calcularValorTotal() {
-    const valores = Array.from(document.querySelectorAll('.valor-total'))
-      .map(input => parseFloat(input.value) || 0);
-    
-    const total = valores.reduce((acc, curr) => acc + curr, 0);
-    document.getElementById('valor_total_pedido').value = `R$ ${total.toFixed(2)}`;
-  }
-
-  function calcularValorProduto(produtoItem) {
-    const select = produtoItem.querySelector('.produto-select');
-    const quantidade = produtoItem.querySelector('.quantidade-input');
-    const valorTotal = produtoItem.querySelector('.valor-total');
-    
-    const valor = parseFloat(select.selectedOptions[0]?.dataset.valor || 0);
-    const qtd = parseInt(quantidade.value) || 0;
-    
-    valorTotal.value = `R$ ${(valor * qtd).toFixed(2)}`;
-    calcularValorTotal();
-  }
+  produtoCount = document.querySelector('.produto-item') ? 1 : 0;
 
   // Eventos para o primeiro produto
   const primeiroProduto = document.querySelector('.produto-item');

@@ -63,11 +63,12 @@
 
 <div class="field">
   <label class="label">Produtos</label>
+  <hr>
   <div class="control">
     <div id="produtos-container">
       @if(pedido.produtos && pedido.produtos.length > 0)
         @each(produto in pedido.produtos)
-          <div class="produto-item box mb-3">
+          <div class="produto-item box mb-3" style="border: 1px solid #000!important; background-color: #fcfcfc; padding: 20px; border-radius: 10px;margin-bottom: 20px;">
             <div class="columns">
               <div class="column">
                 <div class="field">
@@ -116,7 +117,7 @@
           </div>
         @end
       @else
-        <div class="produto-item box mb-3">
+        <div class="produto-item box mb-3" style="border: 1px solid #ccc; background-color: #fcfcfc; padding: 20px; border-radius: 10px;margin-bottom: 20px;">
           <div class="columns">
             <div class="column">
               <div class="field">
@@ -171,7 +172,7 @@
     </button>
   </div>
 </div>
-
+<hr>
 <div class="field">
   <label class="label">Valor Total do Pedido</label>
   <div class="control">
