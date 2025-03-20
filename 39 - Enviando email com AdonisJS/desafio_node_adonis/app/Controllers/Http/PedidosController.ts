@@ -93,11 +93,9 @@ export default class PedidosController {
   }
 
   public async create({ view }: HttpContextContract) {
-    const clientes = await new ClienteService().findAll()
     const produtos = await new ProdutoService().findAll()
     return view.render('pedidos/create', {
       title: 'Novo Pedido',
-      clientes,
       produtos
     })
   }

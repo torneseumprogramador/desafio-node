@@ -20,7 +20,7 @@ function adicionarProduto() {
 
 function calcularValorTotal() {
   const valores = Array.from(document.querySelectorAll('.valor-total'))
-    .map(input => parseFloat(input.value) || 0);
+    .map(input => parseFloat(input.value.replace("R$", "")) || 0);
   
   const total = valores.reduce((acc, curr) => acc + curr, 0);
   document.getElementById('valor_total_pedido').value = `R$ ${total.toFixed(2)}`;

@@ -32,6 +32,28 @@ export default class ClientesController {
     })
   }
 
+  public async indexJson({ request }: HttpContextContract) {
+    const page = Number(request.input('page', 1))
+    const limit = 4
+    const search = request.input('search', '')
+    
+    const { data: clientes, meta } = await new ClienteService().paginate(page, limit, search)
+    
+    const viewMeta: IViewPaginationMeta = {
+      ...meta,
+      first_page: 1,
+      first_page_url: `/clientes?page=1${search ? `&search=${search}` : ''}`,
+      last_page_url: `/clientes?page=${meta.last_page}${search ? `&search=${search}` : ''}`,
+      next_page_url: page < meta.last_page ? `/clientes?page=${page + 1}${search ? `&search=${search}` : ''}` : null,
+      previous_page_url: page > 1 ? `/clientes?page=${page - 1}${search ? `&search=${search}` : ''}` : null
+    }
+
+    return {
+      clientes,
+      meta: viewMeta
+    }
+  }
+
   public async show({ view, params }: HttpContextContract) {
     const cliente = await new ClienteService().findById(params.id)
     

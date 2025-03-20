@@ -32,12 +32,13 @@ Route.group(() => {
   Route.get('/clientes', 'ClientesController.index').as('clientes.index')
   Route.get('/clientes/novo', 'ClientesController.create')
   Route.post('/clientes', 'ClientesController.store')
+  Route.get('/clientes/json', 'ClientesController.indexJson')
   Route.get('/clientes/:id', 'ClientesController.show')
   Route.get('/clientes/:id/edit', 'ClientesController.edit')
   Route.post('/clientes/multiple-delete', 'ClientesController.destroyMultiple')
   Route.post('/clientes/:id', 'ClientesController.update')
   Route.get('/clientes/:id/delete', 'ClientesController.destroy')
-
+  
   // Rotas de administradores
   Route.get('/administradores', 'AdministradoresController.index').as('administradores.index')
   Route.get('/administradores/novo', 'AdministradoresController.create')

@@ -1,20 +1,10 @@
 @set('pedido', pedido || {})
 
-<div class="field">
-  <label class="label">Cliente</label>
-  <div class="control">
-    <div class="select is-fullwidth">
-      <select name="cliente_id" required>
-        <option value="">Selecione um cliente</option>
-        @each(cliente in clientes)
-          <option value="{{ cliente.id }}" {{ cliente.id === pedido.cliente_id ? 'selected' : '' }}>
-            {{ cliente.nome }}
-          </option>
-        @end
-      </select>
-    </div>
-  </div>
-</div>
+@set('name', 'cliente_id')
+@set('value', pedido.cliente_id)
+@set('required', true)
+@set('selectedText', pedido.cliente?.nome)
+@include('components/_cliente-select')
 
 @if(pedido.id)
   <div class="field">
