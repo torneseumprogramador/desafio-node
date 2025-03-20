@@ -1,0 +1,180 @@
+@set('pedido', pedido || {})
+
+<div class="field">
+  <label class="label">Cliente</label>
+  <div class="control">
+    <div class="select is-fullwidth">
+      <select name="cliente_id" required>
+        <option value="">Selecione um cliente</option>
+        @each(cliente in clientes)
+          <option value="{{ cliente.id }}" {{ cliente.id === pedido.cliente_id ? 'selected' : '' }}>
+            {{ cliente.nome }}
+          </option>
+        @end
+      </select>
+    </div>
+  </div>
+</div>
+
+@if(pedido.id)
+  <div class="field">
+    <label class="label">Status</label>
+    <div class="control">
+      <div class="select is-fullwidth">
+        <select name="status" required>
+          <option value="pendente" {{ pedido.status === 'pendente' ? 'selected' : '' }}>Pendente</option>
+          <option value="aprovado" {{ pedido.status === 'aprovado' ? 'selected' : '' }}>Aprovado</option>
+          <option value="cancelado" {{ pedido.status === 'cancelado' ? 'selected' : '' }}>Cancelado</option>
+        </select>
+      </div>
+    </div>
+  </div>
+@endif
+
+<div class="field">
+  <label class="label">Forma de Pagamento</label>
+  <div class="control">
+    <div class="select is-fullwidth">
+      <select name="forma_pagamento">
+        <option value="">Selecione a forma de pagamento</option>
+        <option value="dinheiro" {{ pedido.forma_pagamento === 'dinheiro' ? 'selected' : '' }}>Dinheiro</option>
+        <option value="cartao_credito" {{ pedido.forma_pagamento === 'cartao_credito' ? 'selected' : '' }}>Cartão de Crédito</option>
+        <option value="cartao_debito" {{ pedido.forma_pagamento === 'cartao_debito' ? 'selected' : '' }}>Cartão de Débito</option>
+        <option value="pix" {{ pedido.forma_pagamento === 'pix' ? 'selected' : '' }}>PIX</option>
+        <option value="boleto" {{ pedido.forma_pagamento === 'boleto' ? 'selected' : '' }}>Boleto</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Data de Entrega</label>
+  <div class="control">
+    <input type="date" name="data_entrega" class="input" value="{{ pedido.data_entrega ? new Date(pedido.data_entrega).toISOString().split('T')[0] : '' }}">
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Observações</label>
+  <div class="control">
+    <textarea name="observacoes" class="textarea" rows="3">{{ pedido.observacoes || '' }}</textarea>
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Produtos</label>
+  <div class="control">
+    <div id="produtos-container">
+      @if(pedido.produtos && pedido.produtos.length > 0)
+        @each(produto in pedido.produtos)
+          <div class="produto-item box mb-3">
+            <div class="columns">
+              <div class="column">
+                <div class="field">
+                  <label class="label">Produto</label>
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select name="produtos[{{ $loop.index0 }}][produto_id]" class="produto-select" required>
+                        <option value="">Selecione um produto</option>
+                        @each(p in produtos)
+                          <option value="{{ p.id }}" data-valor="{{ p.valor }}" {{ p.id === produto.produto_id ? 'selected' : '' }}>
+                            {{ p.nome }} - R$ {{ p.valor }}
+                          </option>
+                        @end
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-2">
+                <div class="field">
+                  <label class="label">Quantidade</label>
+                  <div class="control">
+                    <input type="number" name="produtos[{{ $loop.index0 }}][quantidade]" class="input quantidade-input" min="1" value="{{ produto.quantidade }}" required>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-2">
+                <div class="field">
+                  <label class="label">Valor Total</label>
+                  <div class="control">
+                    <input type="text" class="input valor-total" value="R$ {{ produto.valor_total }}" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-1">
+                <div class="field">
+                  <label class="label">&nbsp;</label>
+                  <div class="control">
+                    <button type="button" class="button is-danger remove-produto">
+                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        @end
+      @else
+        <div class="produto-item box mb-3">
+          <div class="columns">
+            <div class="column">
+              <div class="field">
+                <label class="label">Produto</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select name="produtos[0][produto_id]" class="produto-select" required>
+                      <option value="">Selecione um produto</option>
+                      @each(produto in produtos)
+                        <option value="{{ produto.id }}" data-valor="{{ produto.valor }}">
+                          {{ produto.nome }} - R$ {{ produto.valor }}
+                        </option>
+                      @end
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-2">
+              <div class="field">
+                <label class="label">Quantidade</label>
+                <div class="control">
+                  <input type="number" name="produtos[0][quantidade]" class="input quantidade-input" min="1" required>
+                </div>
+              </div>
+            </div>
+            <div class="column is-2">
+              <div class="field">
+                <label class="label">Valor Total</label>
+                <div class="control">
+                  <input type="text" class="input valor-total" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="column is-1">
+              <div class="field">
+                <label class="label">&nbsp;</label>
+                <div class="control">
+                  <button type="button" class="button is-danger remove-produto" style="display: none;">
+                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      @endif
+    </div>
+    <button type="button" class="button is-info" onclick="adicionarProduto()">
+      <span class="icon"><i class="mdi mdi-plus"></i></span>
+      <span>Adicionar Produto</span>
+    </button>
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Valor Total do Pedido</label>
+  <div class="control">
+    <input type="text" name="valor_total" id="valor_total_pedido" class="input" value="R$ {{ pedido.valor_total || '0.00' }}" readonly>
+  </div>
+</div> 

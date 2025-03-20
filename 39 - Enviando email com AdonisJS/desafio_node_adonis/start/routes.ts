@@ -57,6 +57,13 @@ Route.group(() => {
   Route.post('/produtos/:id', 'ProdutosController.update')
   Route.get('/produtos/:id/delete', 'ProdutosController.destroy')
 
+  // Rotas de pedidos
+  Route.get('/pedidos', 'PedidosController.index').as('pedidos.index')
+  Route.get('/pedidos/novo', 'PedidosController.create')
+  Route.post('/pedidos', 'PedidosController.store')
+  Route.get('/pedidos/:id', 'PedidosController.show')
+  Route.get('/pedidos/:id/edit', 'PedidosController.edit')
+  
   // Rota de logout
   Route.post('/logout', 'AuthController.logout').as('auth.logout')
 }).middleware('auth')
