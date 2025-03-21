@@ -1,0 +1,34 @@
+@layout('layouts/main')
+
+@section('content')
+<section class="section main-section">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-account"></i></span>
+        Detalhes do Administrador
+      </p>
+      <div class="buttons">
+        <a href="/administradores/{{ administrador.id }}/edit" class="button is-primary">
+          <span class="icon"><i class="mdi mdi-pencil"></i></span>
+        </a>
+      </div>
+    </header>
+    <div class="card-content">
+      <div class="field">
+        <label class="label">Nome</label>
+        <div class="control">
+          <p>{{ administrador.nome }}</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <p>{{ administrador.email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+@end 

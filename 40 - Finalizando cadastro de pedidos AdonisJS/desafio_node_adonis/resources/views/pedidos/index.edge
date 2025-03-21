@@ -62,7 +62,7 @@
                 </label>
               </td>
               <td data-label="ID">#{{ pedido.id }}</td>
-              <td data-label="Cliente">{{ pedido.cliente.nome }}</td>
+              <td data-label="Cliente">{{ pedido.cliente?.nome }}</td>
               <td data-label="Valor Total">R$ {{ pedido.valor_total }}</td>
               <td data-label="Status">
                 <span class="tag {{ pedido.status === 'pendente' ? 'is-warning' : pedido.status === 'aprovado' ? 'is-success' : 'is-danger' }}">

@@ -1,6 +1,11 @@
 export interface IPedido {
   id?: number
   cliente_id: number
+  cliente?: {
+    id: number
+    nome: string
+    whatsapp: string
+  }
   valor_total?: number
   status: string
   forma_pagamento?: string
@@ -21,4 +26,4 @@ export interface IPedido {
     valor_unitario: number
     valor_total: number
   }[]
-} 
+}
