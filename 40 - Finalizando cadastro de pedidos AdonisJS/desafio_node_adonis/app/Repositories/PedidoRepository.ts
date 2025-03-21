@@ -1,6 +1,7 @@
 import { IPedido } from 'App/Interfaces/IPedido'
 import { Pedido } from 'App/Entities/Pedido'
 import Database from '@ioc:Adonis/Lucid/Database'
+import { PedidoProdutoRepository } from 'App/Repositories/PedidoProdutoRepository'
 
 export class PedidoRepository {
   private table = 'pedidos'
@@ -21,13 +22,23 @@ export class PedidoRepository {
   }
 
   public async create(data: Omit<IPedido, 'id' | 'created_at' | 'updated_at'>): Promise<Pedido> {
+    const { produtos, ...pedidoData } = data
     const [id] = await Database.table(this.table).insert({
-      ...data,
+      ...pedidoData,
       created_at: new Date(),
       updated_at: new Date()
     })
     const pedido = await this.findById(id)
     if (!pedido) throw new Error('Erro ao criar pedido')
+
+    const pedidoProdutoRepo = new PedidoProdutoRepository()
+    for (const produto of data.produtos) {
+      await pedidoProdutoRepo.create({
+        pedido_id: id,
+        ...produto
+      })
+    }
+
     return pedido
   }
 

@@ -1,6 +1,7 @@
 import { IPedido } from 'App/Interfaces/IPedido'
 import { PedidoRepository } from 'App/Repositories/PedidoRepository'
 import { Pedido } from 'App/Entities/Pedido'
+import { ProdutoService } from './ProdutoService'
 
 export class PedidoService {
   private repository: PedidoRepository
@@ -36,11 +37,42 @@ export class PedidoService {
     }
   }
 
+  private validarProdutos(produtos: any[]): void {
+    if (!produtos || produtos.length === 0) {
+      throw new Error('É necessário adicionar pelo menos um produto ao pedido')
+    }
+
+    produtos.forEach(produto => {
+      this.validarCampoObrigatorio(produto.produto_id, 'produto_id')
+      this.validarValorNumerico(produto.quantidade, 'quantidade')
+    })
+  }
+
   public async create(data: IPedido): Promise<Pedido> {
     this.validarCampoObrigatorio(data.cliente_id, 'cliente')
-    this.validarValorNumerico(data.valor_total, 'valor total')
+    data.valor_total = data.valor_total ?? 0
     this.validarCampoObrigatorio(data.status, 'status')
     this.validarEnderecoEntrega(data)
+    this.validarProdutos(data.produtos)
+
+    data.produtos = await Promise.all(data.produtos.map(async produto => {
+      const produtoDatabase = await new ProdutoService().findById(produto.produto_id)
+      if (!produtoDatabase) {
+        throw new Error(`Produto (${produto.produto_id}) não encontrado`)
+      }
+
+      const quantidade = produto.quantidade
+      const valorUnitario = produtoDatabase.valor
+      const valorTotalProduto = quantidade * valorUnitario
+      data.valor_total = (data.valor_total || 0) + valorTotalProduto
+
+      return {
+        produto_id: produto.produto_id,
+        quantidade: quantidade,
+        valor_unitario: valorUnitario,
+        valor_total: valorTotalProduto
+      }
+    }))
 
     return await this.repository.create(data)
   }

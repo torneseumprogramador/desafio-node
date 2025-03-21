@@ -1,7 +1,7 @@
 export interface IPedido {
   id?: number
   cliente_id: number
-  valor_total: number
+  valor_total?: number
   status: string
   forma_pagamento?: string
   observacoes?: string
@@ -15,4 +15,10 @@ export interface IPedido {
   endereco_entrega_cep: string
   created_at?: Date
   updated_at?: Date
+  produtos: {
+    produto_id: number
+    quantidade: number
+    valor_unitario: number
+    valor_total: number
+  }[]
 } 

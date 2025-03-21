@@ -109,9 +109,13 @@ export default class PedidosController {
         throw new Error('Cliente não encontrado')
       }
 
+      const produtosRequest = request.input('produtos', [])
+      if (!produtosRequest.length) {
+        throw new Error('É necessário adicionar pelo menos um produto ao pedido')
+      }
+
       const data = {
         cliente_id: clienteId,
-        valor_total: request.input('valor_total'),
         status: request.input('status', 'pendente'),
         forma_pagamento: request.input('forma_pagamento'),
         observacoes: request.input('observacoes'),
@@ -122,13 +126,15 @@ export default class PedidosController {
         endereco_entrega_bairro: cliente.bairro,
         endereco_entrega_cidade: cliente.cidade,
         endereco_entrega_estado: cliente.estado,
-        endereco_entrega_cep: cliente.cep
+        endereco_entrega_cep: cliente.cep,
+        produtos: produtosRequest
       }
 
       await new PedidoService().create(data)
       session.flash('success', 'Pedido cadastrado com sucesso!')
       return response.redirect().toRoute('pedidos.index')
     } catch (error) {
+      console.log(error)
       session.flash('error', error.message || 'Erro ao cadastrar pedido. Por favor, tente novamente.')
       return response.redirect().back()
     }
