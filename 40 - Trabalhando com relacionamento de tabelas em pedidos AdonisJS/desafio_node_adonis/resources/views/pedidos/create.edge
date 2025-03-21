@@ -1,0 +1,28 @@
+@layout('layouts/main')
+
+@section('content')
+<section class="section main-section">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-cart-plus"></i></span>
+        Novo Pedido
+      </p>
+    </header>
+    <div class="card-content">
+      <form action="/pedidos" method="POST">
+        @include('pedidos/_form')
+
+        @set('submitText', 'Cadastrar')
+        @set('submitIcon', 'mdi mdi-content-save')
+        @set('pathBack', '/pedidos')
+        @include('components/_buttons')
+      </form>
+    </div>
+  </div>
+</section>
+@end
+
+@section('scripts')
+<script src="/js/pedido-form.js"></script>
+@end 
