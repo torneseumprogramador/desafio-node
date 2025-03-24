@@ -98,43 +98,7 @@
   </nav>
   
   <aside class="aside is-placed-left is-expanded">
-    <div class="aside-tools">
-      <div>
-        Adonis <b class="font-black">Js</b>
-      </div>
-    </div>
-    <div class="menu is-menu-main">
-      <p class="menu-label">General</p>
-      <ul class="menu-list">
-        <li class="active">
-          <a href="/">
-            <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
-            <span class="menu-item-label">Dashboard</span>
-          </a>
-        </li>
-      </ul>
-      <p class="menu-label">Cadastros</p>
-      <ul class="menu-list">
-        <li class="--set-active-tables-html">
-          <a href="/clientes">
-            <span class="icon"><i class="mdi mdi-table"></i></span>
-            <span class="menu-item-label">Clientes</span>
-          </a>
-        </li>
-        <li class="--set-active-tables-html">
-          <a href="/administradores">
-            <span class="icon"><i class="mdi mdi-table"></i></span>
-            <span class="menu-item-label">Administradores</span>
-          </a>
-        </li>
-        <li class="--set-active-tables-html">
-          <a href="/produtos">
-            <span class="icon"><i class="mdi mdi-table"></i></span>
-            <span class="menu-item-label">Produtos</span>
-          </a>
-        </li>
-      </ul>
-    </div>
+    @include('layouts/_aside')
   </aside>
 
   <div id="content" style="min-height: calc(100vh - 120px);">
