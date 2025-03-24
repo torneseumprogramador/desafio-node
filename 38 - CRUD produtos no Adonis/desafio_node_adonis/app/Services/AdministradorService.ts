@@ -66,6 +66,13 @@ export class AdministradorService {
     return await this.repository.delete(id)
   }
 
+  public async deleteMultiple(ids: number[]): Promise<void> {
+    if (!ids || ids.length === 0) {
+      throw new Error('Nenhum administrador selecionado para exclusão')
+    }
+    await this.repository.deleteMultiple(ids)
+  }
+
   public async list(): Promise<IAdministrador[]> {
     return await this.repository.list()
   }
