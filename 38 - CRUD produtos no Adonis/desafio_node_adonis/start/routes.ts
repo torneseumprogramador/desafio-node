@@ -46,7 +46,7 @@ Route.group(() => {
   Route.get('/administradores/:id/edit', 'AdministradoresController.edit')
   Route.post('/administradors/multiple-delete', 'AdministradoresController.destroyMultiple')
   Route.post('/administradores/:id', 'AdministradoresController.update')
-  Route.post('/administradores/:id/delete', 'AdministradoresController.destroy')
+  Route.get('/administradores/:id/delete', 'AdministradoresController.destroy')
 
   // Rotas de produtos
   Route.get('/produtos', 'ProdutosController.index').as('produtos.index')
