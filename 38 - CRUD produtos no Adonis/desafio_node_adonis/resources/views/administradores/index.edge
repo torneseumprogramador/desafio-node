@@ -163,7 +163,7 @@
     const form = document.getElementById('deleteForm')
     const adminNameElement = document.getElementById('adminName')
 
-    form.action = `/administradores/${id}`
+    form.action = `/administradores/${id}/delete`
     adminNameElement.textContent = nome
     modal.classList.add('is-active')
   }
