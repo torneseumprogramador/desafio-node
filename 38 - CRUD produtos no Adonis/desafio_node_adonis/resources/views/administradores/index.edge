@@ -13,6 +13,10 @@
         Lista de Administradores
       </p>
       <div class="buttons">
+        <button id="deleteSelectedBtn" class="button is-danger" style="display: none;" onclick="openDeleteMultipleModal()">
+          <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+          <span>Excluir Selecionados</span>
+        </button>
         <a href="/administradores/novo" class="button is-primary">
           <span class="icon"><i class="mdi mdi-account-plus"></i></span>
         </a>
@@ -22,6 +26,12 @@
       <table>
         <thead>
           <tr>
+            <th class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" id="selectAll">
+                <span class="check"></span>
+              </label>
+            </th>
             <th>Nome</th>
             <th>Email</th>
             <th></th>
@@ -42,6 +52,12 @@
           @end
           @each(administrador in administradores)
             <tr>
+              <td class="checkbox-cell">
+                <label class="checkbox">
+                  <input type="checkbox" class="administrador-checkbox" value="{{ administrador.id }}">
+                  <span class="check"></span>
+                </label>
+              </td>
               <td data-label="Nome">{{ administrador.nome }}</td>
               <td data-label="Email">{{ administrador.email }}</td>
               <td class="actions-cell">
@@ -103,9 +119,44 @@
     </footer>
   </div>
 </div>
+
+{{-- Modal de Confirmação de Exclusão Múltipla --}}
+<div id="deleteMultipleModal" class="modal" style="display: none;">
+  <div class="modal-background" onclick="closeDeleteMultipleModal()"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Confirmar Exclusão Múltipla</p>
+      <button class="delete" aria-label="close" onclick="closeDeleteMultipleModal()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="content has-text-centered">
+        <p class="subtitle mt-4">
+          Tem certeza que deseja excluir os <strong data-quantidade>0</strong> administradores selecionados?
+        </p>
+        <p class="has-text-grey is-size-7">Esta ação não pode ser desfeita.</p>
+      </div>
+    </section>
+    <footer class="modal-card-foot" style="justify-content: flex-end;">
+      <button class="button" onclick="closeDeleteMultipleModal()">Cancelar</button>
+      <form id="deleteMultipleForm" method="POST" style="display: none;">
+        <input type="hidden" name="ids" id="selectedIds">
+      </form>
+      <button class="button is-danger" onclick="confirmarExclusaoMultipla()">
+        <span class="icon">
+          <i class="mdi mdi-trash-can"></i>
+        </span>
+        <span>Excluir</span>
+      </button>
+    </footer>
+  </div>
+</div>
+
+
 @end
 
 @section('scripts')
+
+
 <script>
   function openDeleteModal(id, nome) {
     const modal = document.getElementById('deleteModal')
@@ -121,5 +172,9 @@
     const modal = document.getElementById('deleteModal')
     modal.classList.remove('is-active')
   }
+</script>
+<script src="/js/multiple-delete.js"></script>
+<script>
+  initMultipleDelete('administrador');
 </script>
 @end 
