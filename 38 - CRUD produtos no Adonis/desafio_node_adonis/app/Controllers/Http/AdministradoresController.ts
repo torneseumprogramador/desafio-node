@@ -77,6 +77,18 @@ export default class AdministradoresController {
     })
   }
 
+    public async destroyMultiple({ request, response, session }: HttpContextContract) {
+      try {
+        const ids = JSON.parse(request.input('ids'))
+        await new AdministradorService().deleteMultiple(ids)
+        session.flash('success', 'Administradores excluídos com sucesso!')
+        return response.redirect().back()
+      } catch (error) {
+        session.flash('error', error.message)
+        return response.redirect().back()
+      }
+    }
+
   public async store({ request, response, session }: HttpContextContract) {
     try {
       const data = request.only([
