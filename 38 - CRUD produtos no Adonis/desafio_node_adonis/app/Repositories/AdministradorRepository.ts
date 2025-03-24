@@ -67,4 +67,9 @@ export class AdministradorRepository {
       }
     }
   }
+
+  public async deleteMultiple(ids: number[]): Promise<boolean> {
+    const affectedRows = await Database.from(this.table).whereIn('id', ids).delete()
+    return Number(affectedRows[0]) > 0
+  }
 } 
