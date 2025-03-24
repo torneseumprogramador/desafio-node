@@ -1,0 +1,26 @@
+@layout('layouts/main')
+
+@section('content')
+<section class="section main-section">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-package-variant"></i></span>
+        Editar Produto
+      </p>
+    </header>
+    <div class="card-content">
+      <form method="POST" action="/produtos/{{ produto.id }}">
+        @include('produtos/_form')
+
+        <hr>
+
+        @set('submitText', 'Salvar')
+        @set('submitIcon', 'mdi-content-save')
+        @set('pathBack', '/produtos')
+        @include('components/_buttons')
+      </form>
+    </div>
+  </div>
+</section>
+@end 
