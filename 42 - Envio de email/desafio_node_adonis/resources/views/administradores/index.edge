@@ -1,0 +1,125 @@
+@layout('layouts/main')
+
+@section('styles')
+  <link rel="stylesheet" href="/css/modal.css">
+@end
+
+@section('content')
+<section class="section main-section">
+  <div class="card has-table">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
+        Lista de Administradores
+      </p>
+      <div class="buttons">
+        <a href="/administradores/novo" class="button is-primary">
+          <span class="icon"><i class="mdi mdi-account-plus"></i></span>
+        </a>
+      </div>
+    </header>
+    <div class="card-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @if(administradores.length === 0)
+            <tr>
+              <td colspan="3" class="has-text-centered">
+                <div class="content has-text-grey has-text-centered" style="text-align: center;">
+                  <p>Nenhum administrador encontrado</p>
+                  @if(search)
+                    <p class="is-size-7">Tente ajustar os termos da busca</p>
+                  @endif
+                </div>
+              </td>
+            </tr>
+          @end
+          @each(administrador in administradores)
+            <tr>
+              <td data-label="Nome">{{ administrador.nome }}</td>
+              <td data-label="Email">{{ administrador.email }}</td>
+              <td class="actions-cell">
+                <div class="buttons right nowrap">
+                  <a href="/administradores/{{ administrador.id }}" class="button small green">
+                    <span class="icon"><i class="mdi mdi-eye"></i></span>
+                  </a>
+                  <a href="/administradores/{{ administrador.id }}/edit" class="button small blue">
+                    <span class="icon"><i class="mdi mdi-pencil"></i></span>
+                  </a>
+                  <button 
+                    class="button small red" 
+                    onclick="openDeleteModal('{{ administrador.id }}', '{{ administrador.nome }}')"
+                    type="button"
+                  >
+                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          @end
+        </tbody>
+      </table>
+      <div class="table-pagination">
+        <div class="flex items-center justify-between">
+          <div class="buttons">
+            @if(meta.current_page > 1)
+              <a href="{{ meta.previous_page_url }}" class="button">Anterior</a>
+            @endif
+            @if(meta.current_page < meta.last_page)
+              <a href="{{ meta.next_page_url }}" class="button">Próximo</a>
+            @endif
+          </div>
+          <small>Página {{ meta.current_page }} de {{ meta.last_page }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{-- Modal de confirmação de exclusão --}}
+<div class="modal" id="deleteModal" style="display: none;">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Confirmar Exclusão</p>
+      <button class="delete" aria-label="close" onclick="closeDeleteModal()"></button>
+    </header>
+    <section class="modal-card-body">
+      <p>Tem certeza que deseja excluir o administrador <strong id="adminName"></strong>?</p>
+      <p class="has-text-danger">Esta ação não pode ser desfeita.</p>
+    </section>
+    <footer class="modal-card-foot">
+      <form id="deleteForm" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="button is-danger">Excluir</button>
+        <button type="button" class="button" onclick="closeDeleteModal()">Cancelar</button>
+      </form>
+    </footer>
+  </div>
+</div>
+@end
+
+@section('scripts')
+<script>
+  function openDeleteModal(id, nome) {
+    const modal = document.getElementById('deleteModal')
+    const form = document.getElementById('deleteForm')
+    const adminNameElement = document.getElementById('adminName')
+
+    form.action = `/administradores/${id}`
+    adminNameElement.textContent = nome
+    modal.classList.add('is-active')
+  }
+
+  function closeDeleteModal() {
+    const modal = document.getElementById('deleteModal')
+    modal.classList.remove('is-active')
+  }
+</script>
+@end 
