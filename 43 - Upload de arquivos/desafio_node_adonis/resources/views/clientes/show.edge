@@ -1,0 +1,59 @@
+@layout('layouts/main')
+
+@section('content')
+<section class="section main-section">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-account"></i></span>
+        Detalhes do Cliente
+      </p>
+      <a href="/clientes" class="card-header-icon">
+        <span class="icon"><i class="mdi mdi-arrow-left"></i></span>
+      </a>
+    </header>
+    <div class="card-content">
+      <div class="field">
+        <label class="label">Nome</label>
+        <div class="control">
+          <p>{{ cliente.nome }}</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">WhatsApp</label>
+        <div class="control">
+          <p>{{ cliente.whatsapp }}</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Endereço</label>
+        <div class="control">
+          <p>{{ cliente.logradouro }}, {{ cliente.numero }}</p>
+          @if(cliente.complemento)
+            <p>{{ cliente.complemento }}</p>
+          @endif
+          <p>{{ cliente.bairro }}</p>
+          <p>{{ cliente.cidade }} - {{ cliente.estado }}</p>
+          <p>CEP: {{ cliente.cep }}</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Data de Cadastro</label>
+        <div class="control">
+          <p>{{ new Date(cliente.created_at).toLocaleDateString('pt-BR') }}</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Última Atualização</label>
+        <div class="control">
+          <p>{{ new Date(cliente.updated_at).toLocaleDateString('pt-BR') }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+@end 

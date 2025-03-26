@@ -1,0 +1,26 @@
+@layout('layouts/main')
+
+@section('content')
+<section class="section main-section">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-account-plus"></i></span>
+        Novo Cliente
+      </p>
+    </header>
+    <div class="card-content">
+      <form method="POST" action="/clientes">
+        @include('clientes/_form')
+
+        <hr>
+
+        @set('submitText', 'Cadastrar')
+        @set('submitIcon', 'mdi-account-plus')
+        @set('pathBack', '/clientes')
+        @include('components/_buttons')
+      </form>
+    </div>
+  </div>
+</section>
+@end 

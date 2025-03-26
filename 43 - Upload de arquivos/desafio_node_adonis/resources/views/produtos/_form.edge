@@ -1,0 +1,22 @@
+@set('produto', produto || {})
+
+<div class="field">
+  <label class="label">Nome</label>
+  <div class="control">
+    <input type="text" name="nome" class="input" value="{{ produto.nome || '' }}" required>
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Valor</label>
+  <div class="control">
+    <input type="number" name="valor" class="input" step="0.01" min="0" value="{{ produto.valor || '' }}" required>
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Quantidade</label>
+  <div class="control">
+    <input type="number" name="quantidade" class="input" min="0" value="{{ produto.quantidade || '' }}" required>
+  </div>
+</div>

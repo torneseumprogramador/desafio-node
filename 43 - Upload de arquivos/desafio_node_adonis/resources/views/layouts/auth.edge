@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} - Desafio Node Adonis</title>
+
+  <!-- Tailwind is included -->
+  <link rel="stylesheet" href="/css/main.css">
+  
+  @!section('styles')
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png"/>
+  <link rel="mask-icon" href="/icon/safari-pinned-tab.svg" color="#00b4b6"/>
+
+  <meta name="description" content="Desafio de Node / Adonis.js">
+</head>
+<body>
+  <div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+    @include('components/flash-message')
+    
+    <div id="content">
+      @!section('content')
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/js/main.min.js?v=1628755089081"></script>
+  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
+  
+  @!section('scripts')
+</body>
+</html> 
