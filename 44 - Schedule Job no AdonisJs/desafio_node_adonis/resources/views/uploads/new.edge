@@ -1,0 +1,31 @@
+@layout('layouts/main')
+
+@section('content')
+<section class="section main-section">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-upload"></i></span>
+        Novo Upload
+      </p>
+    </header>
+    <div class="card-content">
+      <form method="POST" action="/arquivos" enctype="multipart/form-data">
+        <div class="field">
+          <label class="label">Arquivo</label>
+          <div class="control">
+            <input type="file" name="file" class="input" required>
+          </div>
+        </div>
+
+        <hr>
+
+        @set('submitText', 'Upload')
+        @set('submitIcon', 'mdi mdi-upload')
+        @set('pathBack', '/arquivos')
+        @include('components/_buttons')
+      </form>
+    </div>
+  </div>
+</section>
+@end

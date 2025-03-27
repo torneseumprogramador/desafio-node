@@ -1,0 +1,205 @@
+@layout('layouts/main')
+
+@section('styles')
+  <link rel="stylesheet" href="/css/modal.css">
+  <link rel="stylesheet" href="/css/styles.css">
+@end
+
+@section('content')
+<section class="section main-section">
+  <div class="card has-table">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-cart"></i></span>
+        Lista de Pedidos
+      </p>
+      <div class="buttons">
+        <button id="deleteSelectedBtn" class="button is-danger" style="display: none;" onclick="openDeleteMultipleModal()">
+          <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+          <span>Excluir Selecionados</span>
+        </button>
+        <a href="/pedidos/novo" class="button is-primary">
+          <span class="icon"><i class="mdi mdi-plus"></i></span>
+        </a>
+      </div>
+    </header>
+    <div class="card-content">
+      <table>
+        <thead>
+          <tr>
+            <th class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" id="selectAll">
+                <span class="check"></span>
+              </label>
+            </th>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Valor Total</th>
+            <th>Status</th>
+            <th>Data Entrega</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @if(pedidos.length === 0)
+            <tr>
+              <td colspan="7" class="has-text-centered">
+                <div class="content has-text-grey has-text-centered" style="text-align: center;">
+                  <p>Nenhum pedido encontrado</p>
+                  @if(search)
+                    <p class="is-size-7">Tente ajustar os termos da busca</p>
+                  @endif
+                </div>
+              </td>
+            </tr>
+          @end
+          @each(pedido in pedidos)
+            <tr>
+              <td class="checkbox-cell">
+                <label class="checkbox">
+                  <input type="checkbox" class="pedido-checkbox" value="{{ pedido.id }}">
+                  <span class="check"></span>
+                </label>
+              </td>
+              <td data-label="ID">#{{ pedido.id }}</td>
+              <td data-label="Cliente">{{ pedido.cliente?.nome }}</td>
+              <td data-label="Valor Total">R$ {{ pedido.valor_total }}</td>
+              <td data-label="Status">
+                <span class="tag {{ pedido.status === 'pendente' ? 'is-warning' : pedido.status === 'aprovado' ? 'is-success' : 'is-danger' }}">
+                  {{ pedido.status }}
+                </span>
+              </td>
+              <td data-label="Data Entrega">{{ pedido.data_entrega ? new Date(pedido.data_entrega).toLocaleDateString('pt-BR') : '-' }}</td>
+              <td class="actions-cell">
+                <div class="buttons right nowrap">
+                  <a href="/pedidos/{{ pedido.id }}" class="button small green">
+                    <span class="icon"><i class="mdi mdi-eye"></i></span>
+                  </a>
+                  <a href="/pedidos/{{ pedido.id }}/edit" class="button small blue">
+                    <span class="icon"><i class="mdi mdi-pencil"></i></span>
+                  </a>
+                  <button 
+                    class="button small red" 
+                    onclick="openDeleteModal('{{ pedido.id }}', 'Pedido #{{ pedido.id }}', 'pedidos')"
+                    type="button"
+                  >
+                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          @end
+        </tbody>
+      </table>
+      <div class="table-pagination">
+        <div class="flex items-center justify-between">
+          <div class="buttons">
+            @if(meta.current_page > 1)
+              <a href="{{ meta.previous_page_url }}" class="button">Anterior</a>
+            @endif
+
+            @if(meta.current_page > 2)
+              <a href="/pedidos?page=1{{ search ? `&search=${search}` : '' }}" class="button">1</a>
+              @if(meta.current_page > 3)
+                <span>...</span>
+              @endif
+            @endif
+
+            @each(pageNum in range(Math.max(1, meta.current_page - 1), Math.min(meta.last_page, meta.current_page + 1)))
+              @if(pageNum == meta.current_page)
+                <button type="button" class="button active">{{ pageNum }}</button>
+              @else
+                <a href="/pedidos?page={{ pageNum }}{{ search ? `&search=${search}` : '' }}" class="button">{{ pageNum }}</a>
+              @endif
+            @end
+
+            @if(meta.current_page < meta.last_page - 1)
+              @if(meta.current_page < meta.last_page - 2)
+                <span>...</span>
+              @endif
+              <a href="/pedidos?page={{ meta.last_page }}{{ search ? `&search=${search}` : '' }}" class="button">{{ meta.last_page }}</a>
+            @endif
+
+            @if(meta.current_page < meta.last_page)
+              <a href="{{ meta.next_page_url }}" class="button">Próximo</a>
+            @endif
+          </div>
+          <small>Página {{ meta.current_page }} de {{ meta.last_page }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{-- Modal de Confirmação de Exclusão --}}
+<div id="deleteModal" class="modal" style="display: none;">
+  <div class="modal-background" onclick="closeDeleteModal()"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Confirmar Exclusão</p>
+      <button class="delete" aria-label="close" onclick="closeDeleteModal()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="content has-text-centered">
+        <span class="icon is-large has-text-danger">
+          <i class="mdi mdi-alert-circle mdi-48px"></i>
+        </span>
+        <p class="subtitle mt-4">
+          Tem certeza que deseja excluir o pedido <strong id="itemNome"></strong>?
+        </p>
+        <p class="has-text-grey is-size-7">Esta ação não pode ser desfeita.</p>
+      </div>
+    </section>
+    <footer class="modal-card-foot" style="justify-content: flex-end;">
+      <button class="button" onclick="closeDeleteModal()">Cancelar</button>
+      <button class="button is-danger" onclick="confirmarExclusao()">
+        <span class="icon">
+          <i class="mdi mdi-trash-can"></i>
+        </span>
+        <span>Excluir</span>
+      </button>
+    </footer>
+  </div>
+</div>
+
+{{-- Modal de Confirmação de Exclusão Múltipla --}}
+<div id="deleteMultipleModal" class="modal" style="display: none;">
+  <div class="modal-background" onclick="closeDeleteMultipleModal()"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Confirmar Exclusão Múltipla</p>
+      <button class="delete" aria-label="close" onclick="closeDeleteMultipleModal()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="content has-text-centered">
+        <p class="subtitle mt-4">
+          Tem certeza que deseja excluir os <strong data-quantidade>0</strong> pedidos selecionados?
+        </p>
+        <p class="has-text-grey is-size-7">Esta ação não pode ser desfeita.</p>
+      </div>
+    </section>
+    <footer class="modal-card-foot" style="justify-content: flex-end;">
+      <button class="button" onclick="closeDeleteMultipleModal()">Cancelar</button>
+      <form id="deleteMultipleForm" action="/pedidos/multiple-delete" method="POST" style="display: none;">
+        <input type="hidden" name="ids" id="selectedIds">
+      </form>
+      <button class="button is-danger" onclick="confirmarExclusaoMultipla()">
+        <span class="icon">
+          <i class="mdi mdi-trash-can"></i>
+        </span>
+        <span>Excluir</span>
+      </button>
+    </footer>
+  </div>
+</div>
+
+@end
+
+@section('scripts')
+  <script src="/js/delete-modal.js"></script>
+  <script src="/js/multiple-delete.js"></script>
+  <script>
+    initMultipleDelete('pedido');
+  </script>
+@end 

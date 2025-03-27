@@ -1,0 +1,99 @@
+@set('name', name || 'cliente_id')
+@set('value', value || '')
+@set('required', required || false)
+
+<div class="field">
+  <label class="label">{{ label || 'Cliente' }}</label>
+  <div class="control">
+    <select name="{{ name }}" class="select2-cliente" {{ required ? 'required' : '' }}>
+      @if(value)
+        <option value="{{ value }}" selected>{{ selectedText || 'Carregando...' }}</option>
+      @endif
+    </select>
+  </div>
+</div>
+
+@section('styles')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+  .select2-container {
+    width: 100% !important;
+  }
+  .select2-container .select2-selection--single {
+    height: 38px;
+    border-color: #9ca3b0;
+    border-radius: 4px;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 38px;
+    padding-left: 0.75em;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 36px;
+  }
+  .select2-dropdown {
+    border-color: #dbdbdb;
+    border-radius: 4px;
+  }
+  .select2-container--default .select2-search--dropdown .select2-search__field {
+    border-color: #dbdbdb;
+    border-radius: 4px;
+    padding: 0.375em 0.75em;
+  }
+  .select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #485fc7;
+  }
+
+  .select2-results {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+</style>
+@end
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.select2-cliente').select2({
+      theme: 'default',
+      width: '100%',
+      placeholder: 'Selecione um cliente',
+      allowClear: true,
+      language: {
+        noResults: function() {
+          return "Nenhum resultado encontrado";
+        },
+        searching: function() {
+          return "Pesquisando...";
+        }
+      },
+      ajax: {
+        url: '/clientes/json',
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+          return {
+            search: params.term,
+            page: params.page || 1
+          };
+        },
+        processResults: function(data, params) {
+          params.page = params.page || 1;
+          
+          return {
+            results: data.clientes.map(cliente => ({
+              id: cliente.id,
+              text: `${cliente.nome} - ${cliente.whatsapp}`
+            })),
+            pagination: {
+              more: data.meta.current_page < data.meta.last_page
+            }
+          };
+        },
+        cache: true
+      }
+    });
+  });
+</script>
+@end 
