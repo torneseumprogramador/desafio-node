@@ -1,0 +1,47 @@
+@layout('layouts/auth')
+
+@section('content')
+  <div class="card" style="max-width: 500px; margin: 0 20%;padding: 0;">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-lock"></i></span>
+        Teste WebSocket <span class="text-blue-600">Js</span>
+      </p>
+    </header>
+    <div class="card-content">
+        <h1>Aqui irei mostrar o número aleatório para o cliente {{ cliente_id }}</h1>
+        <div id="chamadaSetInterval"></div>
+        <div id="nome_cliente"></div>
+        <div id="randomNumber"></div>
+    </div>
+  </div>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    setInterval(() => {
+        const randomNumber = Math.floor(Math.random() * 100) + 1
+        console.log("Chamada SetInterval", randomNumber)
+        document.getElementById('chamadaSetInterval').innerText = "Chamada SetInterval: " + randomNumber
+    }, 1000)
+
+    const socket = io('http://localhost:3030'); // Agora via socket.io
+
+    socket.on('connect', () => {
+        console.log('Conectado ao WebSocket');
+        socket.send('{{ cliente_id }}');
+    });
+
+    socket.on('randomNumber', (data) => {
+        document.getElementById('nome_cliente').innerText = data.cliente.nome;
+        document.getElementById('randomNumber').innerText = data.randomNumber;
+    });
+
+    socket.on('disconnect', () => {
+        console.log('WebSocket desconectado');
+    });
+
+    socket.on('connect_error', (err) => {
+        console.error('Erro na conexão:', err);
+    });
+    </script>
+
+@end 
