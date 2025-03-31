@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Cartas Raras",
+    "color": "bg-orange-400",
+    "slug": "cartas-raras"
+  },
+  {
+    "id": 2,
+    "name": "Decks",
+    "color": "bg-cyan-400",
+    "slug": "decks"
+  },
+  {
+    "id": 3,
+    "name": "Boosters",
+    "color": "bg-blue-400",
+    "slug": "boosters"
+  },
+  {
+    "id": 4,
+    "name": "Acessórios",
+    "color": "bg-blue-500",
+    "slug": "acessorios"
+  }
+]
+

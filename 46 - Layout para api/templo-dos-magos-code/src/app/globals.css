@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 30, 27, 75;
+  --background-end-rgb: 17, 24, 39;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  min-height: 100vh;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(107, 33, 168, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6B21A8;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9333EA;
+}
+
+/* Efeitos de hover suaves */
+* {
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+/* Animação de brilho para elementos mágicos */
+.magic-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px theme('colors.primary.cyan'));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px theme('colors.primary.purple'));
+  }
+} 

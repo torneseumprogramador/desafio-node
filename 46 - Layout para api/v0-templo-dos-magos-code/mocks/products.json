@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Carta Mágica",
+    "price": 20.0,
+    "description": "Uma carta mágica rara com poderes místicos.",
+    "imageUrl": "/placeholder.svg?height=200&width=200&text=Carta%20Mágica"
+  },
+  {
+    "id": 2,
+    "name": "Kit de Cartas",
+    "price": 45.0,
+    "description": "Um kit completo com cartas mágicas variadas.",
+    "imageUrl": "/placeholder.svg?height=200&width=200&text=Kit%20de%20Cartas"
+  },
+  {
+    "id": 3,
+    "name": "Jogo de Tabuleiro",
+    "price": 150.0,
+    "description": "Um jogo de tabuleiro mágico para toda a família.",
+    "imageUrl": "/placeholder.svg?height=200&width=200&text=Jogo%20de%20Tabuleiro"
+  },
+  {
+    "id": 4,
+    "name": "Pacote de Cartas",
+    "price": 30.0,
+    "description": "Um pacote com cartas mágicas aleatórias.",
+    "imageUrl": "/placeholder.svg?height=200&width=200&text=Pacote%20de%20Cartas"
+  },
+  {
+    "id": 5,
+    "name": "Poção Mágica",
+    "price": 25.0,
+    "description": "Uma poção mágica para aumentar seus poderes.",
+    "imageUrl": "/placeholder.svg?height=200&width=200&text=Poção%20Mágica"
+  }
+]
+
