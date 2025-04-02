@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 280 50% 4%;
+    --foreground: 0 0% 100%;
+
+    --card: 280 50% 10%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 280 50% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 45 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 195 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 280 50% 20%;
+    --muted-foreground: 0 0% 80%;
+
+    --accent: 280 60% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 280 50% 30%;
+    --input: 280 50% 20%;
+    --ring: 280 50% 50%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 280 50% 4%;
+    --foreground: 0 0% 100%;
+
+    --card: 280 50% 10%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 280 50% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 45 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 195 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 280 50% 20%;
+    --muted-foreground: 0 0% 80%;
+
+    --accent: 280 60% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 280 50% 30%;
+    --input: 280 50% 20%;
+    --ring: 280 50% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Fonte personalizada para títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", sans-serif;
+}
+
+/* Animações mágicas */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
